@@ -1,0 +1,41 @@
+name: buka_app
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  http: ^1.6.0
+  flutter_secure_storage: ^10.0.0
+  font_awesome_flutter: ^10.7.0 
+  device_info_plus: ^11.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  #flutter_launcher_icons: ^0.14.4
+
+flutter:
+  assets:
+    - assets/images/zodiac/
+
+#flutter_launcher_icons:
+ # android: true
+  #ios: true
+  #image_path: "assets/icon/icon.png"
+  #adaptive_icon_background: "#121826"
+  #adaptive_icon_foreground: "assets/icon/icon.png"
+
+  uses-material-design: true
+

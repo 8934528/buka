@@ -1,0 +1,117 @@
+:root {
+  --purple: #6f42c1;
+  --purple-dark: #5a32a3;
+  --purple-light: #f0ebff;
+}
+
+.bg-purple {
+  background-color: var(--purple) !important;
+}
+
+.bg-purple-light {
+  background-color: var(--purple-light) !important;
+}
+
+.text-purple {
+  color: var(--purple) !important;
+}
+
+.btn-purple {
+  background-color: var(--purple);
+  border-color: var(--purple);
+  color: white;
+}
+
+.btn-purple:hover:not(:disabled) {
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
+  color: white;
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+.btn-outline-purple {
+  color: var(--purple);
+  border-color: var(--purple);
+}
+
+.btn-outline-purple:hover {
+  background-color: var(--purple);
+  border-color: var(--purple);
+  color: white;
+}
+
+.btn:active {
+  transform: translateY(0) !important;
+}
+
+.nav-link {
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--purple) !important;
+  transform: translateY(-1px);
+}
+
+.active-nav {
+  color: var(--purple) !important;
+  font-weight: bold;
+  position: relative;
+}
+
+.active-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background-color: var(--purple);
+  border-radius: 2px;
+}
+
+.card {
+  transition: all 0.3s ease;
+  border-radius: 7px !important;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+.app-card-radius {
+  border-radius: 7px !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(39%) sepia(88%) saturate(1233%) hue-rotate(247deg) brightness(94%) contrast(88%);
+}
+
+.form-control:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
