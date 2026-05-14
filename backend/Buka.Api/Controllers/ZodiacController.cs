@@ -11,14 +11,9 @@ namespace Buka.Api.Controllers;
 [ApiController]
 [Route("api/zodiac")]
 
-public class ZodiacController : ControllerBase
+public class ZodiacController(AppDbContext context) : ControllerBase
 {
-    private readonly AppDbContext _context;
-
-    public ZodiacController(AppDbContext context)
-    {
-        _context = context;
-    }
+    private readonly AppDbContext _context = context;
 
     [HttpGet("{month}/{day}")]
     public async Task<IActionResult> Get(int month, int day)
@@ -45,7 +40,7 @@ public class ZodiacController : ControllerBase
         return Ok(result);
     }
 
-    private dynamic Calculate(int month, int day)
+    private static dynamic Calculate(int month, int day)
     {
         if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
             return Create("Aries", "Brave, Confident", "Impulsive", "Red");
@@ -83,7 +78,7 @@ public class ZodiacController : ControllerBase
         return Create("Pisces", "Compassionate, Artistic", "Emotional", "Sea Green");
     }
 
-    private object Create(string sign, string strengths, string weaknesses, string colors)
+    private static object Create(string sign, string strengths, string weaknesses, string colors)
     {
         return new
         {

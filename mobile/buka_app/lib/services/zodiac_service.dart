@@ -28,7 +28,7 @@ class ZodiacService {
     final token = await StorageService.getToken();
     
     final response = await http.get(
-      Uri.parse(baseUrl + "/history"),
+      Uri.parse("$baseUrl/history"),
       headers: {
         "Authorization": "Bearer $token",
       },

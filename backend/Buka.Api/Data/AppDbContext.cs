@@ -3,11 +3,9 @@ using Buka.Api.Models;
 
 namespace Buka.Api.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-    public DbSet<Zodiac> Zodiacs { get; set; }
+    public DbSet<Zodiac> Zodiacs { get; set; } = null!;
     
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; } = null!;
 }

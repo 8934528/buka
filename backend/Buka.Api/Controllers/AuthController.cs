@@ -10,16 +10,10 @@ namespace Buka.Api.Controllers;
 
 [ApiController]
 [Route("api/auth")]
-public class AuthController : ControllerBase
+public class AuthController(AppDbContext context, IConfiguration configuration) : ControllerBase
 {
-    private readonly AppDbContext _context;
-    private readonly string _jwtKey;
-
-    public AuthController(AppDbContext context, IConfiguration configuration)
-    {
-        _context = context;
-        _jwtKey = ResolveJwtKey(configuration["Jwt:Key"]);
-    }
+    private readonly AppDbContext _context = context;
+    private readonly string _jwtKey = ResolveJwtKey(configuration["Jwt:Key"]);
 
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterDto request)
@@ -39,7 +33,7 @@ public class AuthController : ControllerBase
             }
 
             // Check if user exists
-            if (_context.Users.Any(x => x.Email.ToLower() == normalizedEmail))
+            if (_context.Users.Any(x => string.Equals(x.Email, normalizedEmail, StringComparison.OrdinalIgnoreCase)))
                 return BadRequest(new { message = "User already exists" });
 
             // Create new user
@@ -78,7 +72,7 @@ public class AuthController : ControllerBase
                 return BadRequest(new { message = "Email and password are required" });
             }
 
-            var dbUser = _context.Users.FirstOrDefault(x => x.Email.ToLower() == normalizedEmail);
+            var dbUser = _context.Users.FirstOrDefault(x => string.Equals(x.Email, normalizedEmail, StringComparison.OrdinalIgnoreCase));
 
             if (dbUser == null)
             {
@@ -111,12 +105,12 @@ public class AuthController : ControllerBase
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[]
-            {
+            Subject = new ClaimsIdentity(
+            [
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Name)
-            }),
+            ]),
             Expires = DateTime.UtcNow.AddHours(2),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(keyBytes),

@@ -63,16 +63,18 @@ npm run dev
 
 ## Project Structure
 
-      buka-web/
-      ├── src/
-      │   ├── components/    # Reusable components
-      │   ├── pages/         # Page components
-      │   ├── services/      # API services
-      │   ├── types/         # TypeScript definitions
-      │   ├── App.tsx        # Main app component
-      │   └── main.tsx       # Entry point
-      ├── public/            # Static assets
-      └── package.json       # Dependencies
+```text
+buka-web/
+├── src/
+│   ├── components/    # Reusable components
+│   ├── pages/         # Page components
+│   ├── services/      # API services
+│   ├── types/         # TypeScript definitions
+│   ├── App.tsx        # Main app component
+│   └── main.tsx       # Entry point
+├── public/            # Static assets
+└── package.json       # Dependencies
+```
 
 ---
 

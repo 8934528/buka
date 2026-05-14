@@ -9,14 +9,9 @@ namespace Buka.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/user")]
-public class UserController : ControllerBase
+public class UserController(AppDbContext context) : ControllerBase
 {
-    private readonly AppDbContext _context;
-
-    public UserController(AppDbContext context)
-    {
-        _context = context;
-    }
+    private readonly AppDbContext _context = context;
 
     [HttpGet("profile")]
     public IActionResult GetProfile()
@@ -56,7 +51,7 @@ public class UserController : ControllerBase
             return NotFound(new { message = "User not found." });
 
         var normalizedEmail = request.Email.Trim().ToLowerInvariant();
-        var emailExists = _context.Users.Any(x => x.Id != parsedUserId && x.Email.ToLower() == normalizedEmail);
+        var emailExists = _context.Users.Any(x => x.Id != parsedUserId && string.Equals(x.Email, normalizedEmail, StringComparison.OrdinalIgnoreCase));
         if (emailExists)
             return BadRequest(new { message = "That email is already used by another account." });
 

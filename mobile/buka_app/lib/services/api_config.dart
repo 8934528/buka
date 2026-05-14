@@ -40,4 +40,9 @@ class ApiConfig {
     final root = await getApiBaseUrl();
     return '$root/api/zodiac';
   }
+
+  static Future<String> getTarotBaseUrl() async {
+    final root = await getApiBaseUrl();
+    return '$root/api/tarot';
+  }
 }
